@@ -1,37 +1,40 @@
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * Delete the template below * * * * * * * * * -->
-<!-- * * * * * * * to get started with your project! * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+
 
 <main class="main">
-  <div class="flex side-bar">
-    <div> new button </div>
-      <div>
-        Button list
+  <mat-drawer-container class="container">
+    <mat-drawer mode="side" opened>
+      <div class="side-container">
+        <button mat-flat-button class="side-button" (click)="openDialog()">Add a new Task</button>
+          <div>
+            <button mat-flat-button class="side-tasks-button" *ngFor="let item of buttonList" color="warn" (click)="showDetails(item)">{{item.name}}</button>
+          </div>
       </div>
-  </div>
+    </mat-drawer>
 
-  <div class="flex dashboard">
-    <div> Main dashboard</div>
+    <mat-drawer-content>
+      <div class="side-container">
+        <span class="top-bar">
+          <h3> {{selectedTask ? selectedTask.name : 'No task selected'}} </h3>
+  
+          <div> {{selectedTask ? selectedTask.description : 'No task selected'}}</div>
+          <div> {{selectedTask ? selectedTask.status : 'No task selected'}}</div>
 
-    <div> link</div>
-    <div> file</div>
-    <div> timer </div>
-  </div>
+          <mat-button-toggle-group 
+            name="fontStyle" 
+            aria-label="Font Style" 
+            [(ngModel)]="selectedStatus" 
+            (change)="setStatus()" 
+            [value]="selectedTask ? selectedTask.status : statusList.Todo"
+          >
+            <mat-button-toggle  *ngFor="let enum of keys(statusList)"   [value]="enum" (onKeyPress)="setStatus()">{{enum}}</mat-button-toggle>
+          </mat-button-toggle-group>
+        </span>
+
+        <div> timer </div>
+      </div>
+    </mat-drawer-content>
+  </mat-drawer-container>
 
 </main>
-
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
 
 <router-outlet />

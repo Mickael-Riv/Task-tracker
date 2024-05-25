@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>Création d'une nouvelle tâche</h2>
+<mat-dialog-content>
+ <p> Veuillez saisr le nom de votre tâche</p>
+  <mat-form-field>
+    <mat-label>Task name</mat-label>
+    <input matInput [(ngModel)]="data.name">
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-content>
+	<p>Veuillez saisr la description de votre tâche</p>
+  <mat-form-field>
+    <mat-label>Task Description</mat-label>
+    <input matInput [(ngModel)]="data.description">
+  </mat-form-field>
+  </mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+  <button mat-button mat-dialog-close [mat-dialog-close]="data" cdkFocusInitial>Validate</button>
+</mat-dialog-actions>
